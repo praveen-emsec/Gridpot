@@ -1,0 +1,37 @@
+{
+  "logs": "db",
+  "logs_location": "",
+  "syslog_address":"udp://syslog:514",
+  "syslog_facility":3,
+  "postgres":"//honeypotuser:honeypotpassword@honeypot_postgres:9999/data",
+  "db_options":["drop"],
+  "filter": "not port 9999 and not port 514",
+  "interface": "eth0",
+  "honeypots": {
+      "ftp": {
+          "port": 22,
+          "username": "test",
+          "password": "test"
+      },
+      "http": {
+          "port": 80,
+          "username": "test",
+          "password": "test"
+      },
+      "https": {
+          "port": 443,
+          "username": "test",
+          "password": "test"
+      },
+      "postgres": {
+        "port": 5432,
+        "username": "test",
+        "password": "test"
+      },
+      "redis": {
+        "port": 6379,
+        "username": "test",
+        "password": "test"
+      }
+  }
+}

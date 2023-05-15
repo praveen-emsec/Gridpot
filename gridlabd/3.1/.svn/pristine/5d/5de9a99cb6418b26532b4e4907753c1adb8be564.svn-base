@@ -1,2 +1,0 @@
-#!/bin/bash
-svn status --no-ignore | grep '^[?I]' | cut -c 8- | xargs rm -rfv

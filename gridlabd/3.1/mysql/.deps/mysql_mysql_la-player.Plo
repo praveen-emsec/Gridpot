@@ -1,4 +1,0 @@
-mysql/mysql_mysql_la-player.lo: mysql/player.cpp \
- /usr/include/stdc-predef.h
-
-/usr/include/stdc-predef.h:

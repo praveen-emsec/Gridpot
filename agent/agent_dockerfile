@@ -1,0 +1,14 @@
+FROM node:16
+
+WORKDIR /usr/src/app
+
+COPY ./agent/package*.json ./
+
+RUN npm install
+
+#COPY ./agent .
+COPY ./agent/server.js ./
+
+EXPOSE 9090
+
+CMD ["node", "server.js"]

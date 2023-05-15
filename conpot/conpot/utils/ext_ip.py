@@ -22,7 +22,6 @@ import socket
 import requests
 from requests.exceptions import Timeout, ConnectionError
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -39,7 +38,7 @@ def _fetch_data(urls):
     logging.getLogger("requests").setLevel(logging.WARNING)
     for url in urls:
         try:
-            req = requests.get(url)
+            req = requests.get(url, timeout=5)
             if req.status_code == 200:
                 data = req.text.strip()
                 if data is None or not _verify_address(data):
@@ -48,21 +47,21 @@ def _fetch_data(urls):
                     return data
             else:
                 raise ConnectionError
-        except (Timeout, ConnectionError) as e:
-            logger.warning('Could not fetch public ip from {0}'.format(url))
+        except (Timeout, ConnectionError):
+            logger.warning("Could not fetch public ip from %s", url)
     return None
 
 
 def get_ext_ip(config=None, urls=None):
     if config:
-        urls = json.loads(config.get('fetch_public_ip', 'urls'))
+        urls = json.loads(config.get("fetch_public_ip", "urls"))
     public_ip = _fetch_data(urls)
     if public_ip:
-        logger.info('Fetched {0} as external ip.'.format(public_ip))
+        logger.info("Fetched %s as external ip.", public_ip)
     else:
-        logger.warning('Could not fetch public ip: {0}'.format(public_ip))
+        logger.warning("Could not fetch public ip: %s", public_ip)
     return public_ip
 
 
 if __name__ == "__main__":
-    print get_ext_ip(urls=["http://www.telize.com/ip", "http://queryip.net/ip/", "http://ifconfig.me/ip"])
+    print((get_ext_ip(urls=["https://api.ipify.org", "http://127.0.0.1:8000"])))

@@ -1,0 +1,17 @@
+{
+  "name": "agent",
+  "version": "1.0.0",
+  "description": "Node honeypot agent on Docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sleep 60 && node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.1.2",
+    "express": "^4.18.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

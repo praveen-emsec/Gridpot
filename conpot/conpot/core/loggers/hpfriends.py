@@ -16,6 +16,8 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
+import socket
+
 import hpfeeds
 import gevent
 import logging
@@ -24,11 +26,15 @@ logger = logging.getLogger(__name__)
 
 
 class HPFriendsLogger(object):
-
     def __init__(self, host, port, ident, secret, channels):
+        self.host = host
+        self.port = port
+        self.ident = ident
+        self.secret = secret
         self.channels = channels
+        self.max_retires = 5
         self._initial_connection_happend = False
-        gevent.spawn(self._start_connection, host, port, ident, secret)
+        self.greenlet = gevent.spawn(self._start_connection, host, port, ident, secret)
 
     def _start_connection(self, host, port, ident, secret):
         # if no initial connection to hpfeeds this will hang forever, reconnect=True only comes into play
@@ -37,13 +43,27 @@ class HPFriendsLogger(object):
         self._initial_connection_happend = True
 
     def log(self, data):
+        retries = 0
         if self._initial_connection_happend:
             # hpfeed lib supports passing list of channels
-            self.hpc.publish(self.channels, data)
+            while True:
+                if retries >= self.max_retires:
+                    break
+                try:
+                    self.hpc.publish(self.channels, data)
+                except socket.error:
+                    retries += 1
+                    self.__init__(
+                        self.host, self.port, self.ident, self.secret, self.channels
+                    )
+                    gevent.sleep(0.5)
+                else:
+                    break
             error_msg = self.hpc.wait()
             return error_msg
         else:
-            error_msg = 'Not logging event because initial hpfeeds connect has not happend yet.'
+            error_msg = (
+                "Not logging event because initial hpfeeds connect has not happend yet."
+            )
             logger.warning(error_msg)
             return error_msg
-

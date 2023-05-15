@@ -8,4 +8,4 @@ Conpot usage
 .. toctree::
 
     usage
-    hmi
+    customization

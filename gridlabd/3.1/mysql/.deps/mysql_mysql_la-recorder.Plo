@@ -1,4 +1,0 @@
-mysql/mysql_mysql_la-recorder.lo: mysql/recorder.cpp \
- /usr/include/stdc-predef.h
-
-/usr/include/stdc-predef.h:

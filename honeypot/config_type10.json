@@ -1,0 +1,37 @@
+{
+  "logs": "db",
+  "logs_location": "",
+  "syslog_address": "udp://syslog:514",
+  "syslog_facility": 3,
+  "postgres": "//honeypotuser:honeypotpassword@honeypot_postgres:9999/data",
+  "db_options": ["drop"],
+  "filter": "not port 9999 and not port 514",
+  "interface": "eth0",
+  "honeypots": {
+    "ftp": {
+      "port": 21,
+      "username": "test",
+      "password": "test"
+    },
+    "ssh": {
+      "port": 22,
+      "username": "test",
+      "password": "test"
+    },
+    "telnet": {
+      "port": 23,
+      "username": "test",
+      "password": "test"
+    },
+    "vnc": {
+      "port": 5900,
+      "username": "test",
+      "password": "test"
+    },
+    "ldap": {
+      "port": 389,
+      "username": "test",
+      "password": "test"
+    }
+  }
+}

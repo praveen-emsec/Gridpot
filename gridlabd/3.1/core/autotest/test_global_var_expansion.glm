@@ -1,3 +1,0 @@
-global int32 var 1;
-#print var=${++var};
-
