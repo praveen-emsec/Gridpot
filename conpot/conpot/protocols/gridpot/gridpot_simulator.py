@@ -3,17 +3,28 @@
 # Author: W. Owen Redwood
 
 import logging
+<<<<<<< HEAD
 import urllib2
+=======
+import urllib.request
+>>>>>>> origin/main
 import gevent
 import conpot.core as conpot_core
 
 import xml.etree.ElementTree as ET
 import io
 import ConfigParser
+<<<<<<< HEAD
 from GL_obj import GL_obj
 from GL_SWITCH import GL_SWITCH
 from GL_TRANSFORMER import GL_TRANSFORMER
 from GL_REGULATOR import GL_REGULATOR
+=======
+from .GL_obj import GL_obj
+from .GL_SWITCH import GL_SWITCH
+from .GL_TRANSFORMER import GL_TRANSFORMER
+from .GL_REGULATOR import GL_REGULATOR
+>>>>>>> origin/main
 
 logger = logging.getLogger(__name__)
 
@@ -36,8 +47,13 @@ class GridPotSimulator(object):
         gevent.spawn(self.initialize)
 
     def get_http(self, key):
+<<<<<<< HEAD
         print "[*] get_http("+str(key)+")\n\n"
         print "[*] self.SCADA_objects="+str(self.SCADA_objects)
+=======
+        print("[*] get_http("+str(key)+")\n\n")
+        print("[*] self.SCADA_objects="+str(self.SCADA_objects))
+>>>>>>> origin/main
         for x in self.SCADA_objects:
             if key == x.obj_name:
                 return x.http_display()
@@ -55,14 +71,24 @@ class GridPotSimulator(object):
         while True:
             gevent.sleep(1)
             for x in self.SCADA_objects:
+<<<<<<< HEAD
                 print "[*]========================================="
                 print "[*] " + x.obj_name + " properties:"
                 print x.params
+=======
+                print("[*]========================================="_
+                print("[*] " + x.obj_name + " properties:")
+                print(x.params)
+>>>>>>> origin/main
                 for prop in x.params:
                     #print "[*] DEBUG: " + str(prop)
                     response = x.poll_gl_object(prop)
                     x.params[prop] = self.parse_xml_for_value(response)
+<<<<<<< HEAD
                     print "[*] " + x.obj_name + "/"+str(prop)+" is " + str(x.params[prop])
+=======
+                    print("[*] " + x.obj_name + "/"+str(prop)+" is " + str(x.params[prop]))
+>>>>>>> origin/main
                     
                     
     def setup_gl_objects(self):
@@ -70,6 +96,7 @@ class GridPotSimulator(object):
         try:
             gpm_conf.readfp(io.BytesIO(self.gridpotmodel))
         except Exception:
+<<<<<<< HEAD
             print "Error reading the grid pot model from GridLAB-D"
             raise
             exit(0)
@@ -78,6 +105,16 @@ class GridPotSimulator(object):
             
             for scada in gpm_conf.options(self.conpot_name):
                 print "[*] type is: " + str(scada)
+=======
+            print("Error reading the grid pot model from GridLAB-D")
+            raise
+            exit(0)
+        if gpm_conf.has_section(self.conpot_name):
+            print("[*] Found gpm data for this conpot instance")
+            
+            for scada in gpm_conf.options(self.conpot_name):
+                print("[*] type is: " + str(scada))
+>>>>>>> origin/main
                 if scada == "switch":
                     x = GL_SWITCH(self.gridlabd_ip, self.gridlabd_port, gpm_conf.get(self.conpot_name, scada))
                     self.SCADA_objects.append(x)
@@ -110,11 +147,19 @@ class GridPotSimulator(object):
         print request
         response = urllib2.urlopen(request)
         self.gridpotmodel = response.read()
+<<<<<<< HEAD
         print self.gridpotmodel
         if self.gridpotmodel != None:
             self.setup_gl_objects()
         else:
             print "Could not get the .GPM model from GridLAB-D"
+=======
+        print(self.gridpotmodel)
+        if self.gridpotmodel != None:
+            self.setup_gl_objects()
+        else:
+            print("Could not get the .GPM model from GridLAB-D")
+>>>>>>> origin/main
             exit(0)
         
         gevent.spawn(self.poll_gridlabd)

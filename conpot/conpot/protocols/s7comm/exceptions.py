@@ -1,5 +1,6 @@
 class ParseException(Exception):
-    def __init__(self, protocol, reason, payload=""):
+
+    def __init__(self, protocol, reason, payload=''):
         self.proto = protocol
         self.reason = reason
         self.payload = payload
@@ -9,7 +10,8 @@ class ParseException(Exception):
 
 
 class AssembleException(Exception):
-    def __init__(self, protocol, reason, payload=""):
+
+    def __init__(self, protocol, reason, payload=''):
         self.proto = protocol
         self.reason = reason
         self.payload = payload

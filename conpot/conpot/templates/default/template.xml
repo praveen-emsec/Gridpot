@@ -1,23 +1,24 @@
 <core>
     <template>
         <!-- General information about the template -->
-        <entity name="unit">S7-200</entity>
+        <entity name="unit">S7-300</entity>
         <entity name="vendor">Siemens</entity>
-        <entity name="description">Rough simulation of a basic Siemens S7-200 CPU with 2 slaves</entity>
-        <entity name="protocols">HTTP, MODBUS, s7comm, SNMP</entity>
-        <entity name="creator">the conpot team</entity>
-    </template>
+        <entity name="description">Siemens S7-300 CPU with 2 slaves controlling Power Grid</entity>
+        <entity name="protocols">HTTP, MODBUS, s7comm</entity>
+        <entity name="creator">GridLock team</entity>
+    </template> 
+    <!-- removed SNMP, creator new, s7-300 -->
     <databus>
         <!-- Core value that can be retrieved from the databus by key -->
         <key_value_mappings>
             <key name="FacilityName">
-                <value type="value">"Mouser Factory"</value>
+                <value type="value">"District Power Station Unit-241"</value>
             </key>
             <key name="SystemName">
-                <value type="value">"Technodrome"</value>
+                <value type="value">"SIMATIC 300(1)"</value>
             </key>
             <key name="SystemDescription">
-                <value type="value">"Siemens, SIMATIC, S7-200"</value>
+                <value type="value">"Siemens, SIMATIC, S7-300"</value>
             </key>
             <key name="Uptime">
                 <value type="function">conpot.emulators.misc.uptime.Uptime</value>
@@ -32,7 +33,7 @@
                 <value type="value">"CP 443-1 EX40"</value>
             </key>
             <key name="sysLocation">
-                <value type="value">"Venus"</value>
+                <value type="value">"District Council Center"</value>
             </key>
             <key name="sysServices">
                 <value type="value">"72"</value>
@@ -64,15 +65,19 @@
             <key name="Copyright">
                 <value type="value">"Original Siemens Equipment"</value>
             </key>
+            <key name="Firmware">
+                <value type="value">"v.2.6.11"</value >
+            </key>
             <key name="s7_id">
-                <value type="value">"88111222"</value>
+                <value type="value">"S C-Y3TT99128012"</value>
             </key>
             <key name="s7_module_type">
-                <value type="value">"IM151-8 PN/DP CPU"</value>
+                <value type="value">"315-2PN/DP CPU"</value>
             </key>
             <key name="empty">
                 <value type="value">""</value>
             </key>
         </key_value_mappings>
     </databus>
+    <!-- s7_id changed, Firmware added,Original word remove copyright, sysLocation changed form Venus,SystemDescription, SystemName, FacilityName modified -->
 </core>

@@ -1,8 +1,8 @@
-<modbus enabled="True" host="0.0.0.0" port="5020">
+<modbus enabled="True" host="0.0.0.0" port="502">
     <device_info>
         <VendorName>Siemens</VendorName>
         <ProductCode>SIMATIC</ProductCode>
-        <MajorMinorRevision>S7-200</MajorMinorRevision>
+        <MajorMinorRevision>S7-300</MajorMinorRevision>
     </device_info>
     <mode>serial</mode>
     <delay>100</delay>

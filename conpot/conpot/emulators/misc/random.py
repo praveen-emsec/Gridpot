@@ -17,13 +17,12 @@
 
 import random
 
-
 class Random8BitRegisters:
     def __init__(self):
         self.key_num = random.SystemRandom()
 
     def get_value(self):
-        values = [self.key_num.randint(0, 1) for b in range(0, 8)]
+        values = [self.key_num.randint(0,1) for b in range (0, 8)]
         return values
 
 
@@ -32,4 +31,4 @@ class Random16bitRegister:
         self.key_num = random.SystemRandom()
 
     def get_value(self):
-        return [self.key_num.randint(0, 1)]
+        return [self.key_num.randint(0,1)]
